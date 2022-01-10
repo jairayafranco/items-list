@@ -1,7 +1,7 @@
 import API from "./API"
 import Swal from "sweetalert2"
 
-const addItem = (item, e) => {
+const addItem = async(item, e) => {
     if (!item) {
         e.preventDefault()
         Swal.fire({
@@ -10,7 +10,7 @@ const addItem = (item, e) => {
             text: 'Debe ingresar datos en el campo'
           })
     } else {
-        API.sendData(item)
+        await API.sendData(item)
     }
 }
 
