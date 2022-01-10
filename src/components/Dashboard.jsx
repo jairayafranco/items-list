@@ -1,19 +1,18 @@
 import { useEffect, useState } from "react"
-import APIFunctions from "../services/APIFunctions"
-import DOMFunctions from "../services/DOMFunctions"
+import API from "../services/API"
+import DOM from "../services/DOM"
 
 export default function Dashboard() {
     const [item, setItem] = useState("")
     const [getItems, setGetItems] = useState([])
     const [loading, setLoading] = useState(true)
 
-    window.addEventListener('click', DOMFunctions.deleteItem)
+    window.addEventListener('click', DOM.deleteItem)
     
     useEffect(() => {
-        APIFunctions.getData().then(data => setGetItems(data))
+        API.getData().then(data => setGetItems(data))
         setLoading(false)
     }, [])
-
 
     return (
         <div>
@@ -24,7 +23,7 @@ export default function Dashboard() {
                             <h1 id="header-title">Lista de Items</h1>
                         </div>
                         <div className="col-md-6 align-self-center">
-                            <input className="form-control" id="filtro" placeholder="Buscar item..." type="text" onKeyUp={(e) => DOMFunctions.searchItem(e)} />
+                            <input className="form-control" id="filtro" placeholder="Buscar item..." type="text" onKeyUp={(e) => DOM.searchItem(e)} />
                         </div>
                     </div>
                 </div>
@@ -34,8 +33,8 @@ export default function Dashboard() {
                 <div id="main" className="card card-body">
                     <h2 className="title">Agregar Items</h2>
                     <form id="formAgregar" className="col-md-4 mb-3">
-                        <input id="item" type="text" className="form-control mb-2" onChange={(e) => setItem(e.target.value)} />
-                        <input type="submit" className="btn btn-dark" value="Agregar" onClick={(e) => DOMFunctions.addItem(item, e)} />
+                        <input id="item" type="text" className="form-control mb-2" autoFocus onChange={(e) => setItem(e.target.value)} />
+                        <input type="submit" className="btn btn-dark" value="Agregar" onClick={(e) => DOM.addItem(item, e)} />
                     </form>
                     <h2 className="title">Items</h2>
                     <ul id="items" className="list-group">

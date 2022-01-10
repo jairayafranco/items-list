@@ -1,11 +1,13 @@
+let url = 'https://apiharperexpress.jairayafranco.repl.co/items'
+
 const getData = async() => {
-    const response = await fetch('https://apiharperexpress.jairayafranco.repl.co/items')
+    const response = await fetch(url)
     const data = await response.json()
     return data
 }
 
 const sendData = async(data) => {
-    await fetch('https://apiharperexpress.jairayafranco.repl.co/items', {
+    await fetch(url, {
       method: 'POST',
       headers: {
         Accept: 'application/json',
@@ -16,13 +18,11 @@ const sendData = async(data) => {
       })
     })
     .catch(err => console.log("Error: ", err))
-    .then(response => console.log("Datos enviados con exito: ", response))
 }
 
 const deleteData = async(id) => {
-    await fetch(`https://apiharperexpress.jairayafranco.repl.co/items/${id}`, {method: 'DELETE'})
+    await fetch(`${url}/${id}`, {method: 'DELETE'})
     .catch(err => console.log("Error: ", err))
-    .then(response => console.log("Datos eliminados con exito: ", response))
 }
 
 const exportData = { sendData, getData, deleteData }
