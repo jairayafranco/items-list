@@ -9,8 +9,6 @@ export default function Dashboard() {
     const [getItemId, setGetItemId] = useState("")
     const [loading, setLoading] = useState(true)
 
-    window.addEventListener('click', DOM.deleteItem)
-
     useEffect(() => {
         API.getData().then(data => setGetItems(data))
         setLoading(false)
@@ -45,7 +43,7 @@ export default function Dashboard() {
                             : getItems.map((item, key) => (
                                 <li key={key} className="list-group-item" data={item.id}>
                                     {item.descripcion}
-                                    <button className="btn btn-danger btn-sm float-end borrar">X</button>
+                                    <button className="btn btn-danger btn-sm float-end borrar" onClick={(e) => DOM.deleteItem(e)}>X</button>
                                     <button className="btn btn-success btn-sm float-end editar" data-bs-toggle="modal" data-bs-target="#exampleModal" onClick={(e) => setGetItemId(e.target.parentElement.getAttribute('data'))}>✎</button>
                                 </li>
                             ))}
