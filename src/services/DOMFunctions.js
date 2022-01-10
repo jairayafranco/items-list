@@ -39,5 +39,5 @@ const searchItem = (e) => {
     })
 }
 
-
-export default { addItem, deleteItem, searchItem }
+const exportData = { addItem, deleteItem, searchItem }
+export default exportData

@@ -25,4 +25,5 @@ const deleteData = async(id) => {
     .then(response => console.log("Datos eliminados con exito: ", response))
 }
 
-export default { sendData, getData, deleteData }
+const exportData = { sendData, getData, deleteData }
+export default exportData
