@@ -11,7 +11,6 @@ const addItem = (item, e) => {
           })
     } else {
         API.sendData(item)
-        e.target.previousSibling.value = ""
     }
 }
 
@@ -40,6 +39,19 @@ const deleteItem = (e) => {
     }
 }
 
+const editItem = async (newItem, id) => {
+    if(!newItem) {
+        Swal.fire({
+            icon: 'error',
+            title: 'Oops...',
+            text: 'Debe ingresar datos en el campo'
+          })
+    }else {
+        await API.updateData(newItem, id)
+        window.location.reload()
+    }
+}
+
 const searchItem = (e) => {
     const texto = e.target.value.toLowerCase()
     const items = document.querySelectorAll('li')
@@ -53,5 +65,5 @@ const searchItem = (e) => {
     })
 }
 
-const exportData = { addItem, deleteItem, searchItem }
+const exportData = { addItem, deleteItem, searchItem, editItem }
 export default exportData

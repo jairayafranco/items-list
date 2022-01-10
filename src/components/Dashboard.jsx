@@ -1,14 +1,16 @@
 import { useEffect, useState } from "react"
+import Modal from "./Modal"
 import API from "../services/API"
 import DOM from "../services/DOM"
 
 export default function Dashboard() {
     const [item, setItem] = useState("")
     const [getItems, setGetItems] = useState([])
+    const [getItemId, setGetItemId] = useState("")
     const [loading, setLoading] = useState(true)
 
     window.addEventListener('click', DOM.deleteItem)
-    
+
     useEffect(() => {
         API.getData().then(data => setGetItems(data))
         setLoading(false)
@@ -38,15 +40,18 @@ export default function Dashboard() {
                     </form>
                     <h2 className="title">Items</h2>
                     <ul id="items" className="list-group">
-                        {loading 
-                            ? (<div className="loading mt-3"></div>) 
+                        {loading
+                            ? (<div className="loading mt-3"></div>)
                             : getItems.map((item, key) => (
-                                <li key={key} className="list-group-item" data={item.id}>{item.descripcion}
+                                <li key={key} className="list-group-item" data={item.id}>
+                                    {item.descripcion}
                                     <button className="btn btn-danger btn-sm float-end borrar">X</button>
+                                    <button className="btn btn-success btn-sm float-end editar" data-bs-toggle="modal" data-bs-target="#exampleModal" onClick={(e) => setGetItemId(e.target.parentElement.getAttribute('data'))}>✎</button>
                                 </li>
-                        ))}
+                            ))}
                     </ul>
                 </div>
+                <Modal id={getItemId} />
             </div>
         </div>
     )
