@@ -6,12 +6,14 @@ import DOM from "../services/DOM"
 export default function Dashboard() {
     const [item, setItem] = useState("")
     const [getItems, setGetItems] = useState([])
-    const [getItemId, setGetItemId] = useState("")
+    const [getItemId, setGetItemId] = useState([])
     const [loading, setLoading] = useState(true)
 
     useEffect(() => {
         API.getData().then(data => setGetItems(data))
-        setLoading(false)
+        setTimeout(() => {
+          setLoading(false)
+        }, 500)
     }, [])
 
     return (
@@ -33,7 +35,7 @@ export default function Dashboard() {
                 <div id="main" className="card card-body">
                     <h2 className="title">Agregar Items</h2>
                     <form id="formAgregar" className="col-md-4 mb-3">
-                        <input id="item" type="text" className="form-control mb-2" autoFocus onChange={(e) => setItem(e.target.value)} />
+                        <input id="item" type="text" className="form-control mb-2" autoFocus onKeyUp={(e) => setItem(e.target.value)} />
                         <input type="submit" className="btn btn-dark" value="Agregar" onClick={(e) => DOM.addItem(item, e)} />
                     </form>
                     <h2 className="title">Items</h2>
@@ -44,12 +46,12 @@ export default function Dashboard() {
                                 <li key={key} className="list-group-item" data={item.id}>
                                     {item.descripcion}
                                     <button className="btn btn-danger btn-sm float-end borrar" onClick={(e) => DOM.deleteItem(e)}>X</button>
-                                    <button className="btn btn-success btn-sm float-end editar" data-bs-toggle="modal" data-bs-target="#exampleModal" onClick={(e) => setGetItemId(e.target.parentElement.getAttribute('data'))}>✎</button>
+                                    <button className="btn btn-success btn-sm float-end" data-bs-toggle="modal" data-bs-target="#exampleModal" onClick={(e) => setGetItemId({ id: e.target.parentElement.getAttribute('data'), text: e.target.parentElement.firstChild.textContent})}>✎</button>
                                 </li>
                             ))}
                     </ul>
                 </div>
-                <Modal id={getItemId} />
+                <Modal id={getItemId.id} text={getItemId.text} />
             </div>
         </div>
     )

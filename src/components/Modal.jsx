@@ -1,13 +1,9 @@
 import { useState } from "react"
 import DOM from '../services/DOM'
 
-const Modal = ({ id }) => {
+const Modal = ({ id, text }) => {
 
     const [newItem, setNewItem] = useState("")
-
-    const sendNewItem = () => {
-        DOM.editItem(newItem, id)
-    }
 
     return (
         <div>
@@ -19,11 +15,11 @@ const Modal = ({ id }) => {
                             <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div className="modal-body">
-                            <input type="text" className="form-control mb-2" autoFocus onChange={(e) => setNewItem(e.target.value)} />
+                            <input type="text" className="form-control mb-2" defaultValue={text} onKeyUp={(e) => setNewItem(e.target.value)} />
                         </div>
                         <div className="modal-footer">
                             <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-                            <button type="button" className="btn btn-success" onClick={sendNewItem}>Guardar</button>
+                            <button type="button" className="btn btn-success" onClick={() => DOM.editItem(newItem, id)}>Guardar</button>
                         </div>
                     </div>
                 </div>
