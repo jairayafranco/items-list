@@ -15,9 +15,10 @@
     animation: loading 1s linear infinite;
 }
 
-.editar {
-    margin-right: 2px;
+.float-end {
+    margin-right: 5px;
 }
+
 
 @keyframes loading {
     to {
