@@ -10,10 +10,11 @@ export default function Dashboard() {
     const [loading, setLoading] = useState(true)
 
     useEffect(() => {
-        API.getData().then(data => setGetItems(data))
-        setTimeout(() => {
-          setLoading(false)
-        }, 500)
+      const loadSpinner = async() => {
+        await API.getData().then(data => setGetItems(data))
+        setLoading(false)
+      }
+      loadSpinner()
     }, [])
 
     return (
