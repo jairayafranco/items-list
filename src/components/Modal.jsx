@@ -19,7 +19,7 @@ const Modal = ({ id, text }) => {
                         </div>
                         <div className="modal-footer">
                             <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-                            <button type="button" className="btn btn-success" onClick={() => DOM.editItem(newItem == '' ? text : newItem, id)}>Guardar</button>
+                            <button type="button" className="btn btn-success" onClick={() => DOM.editItem(newItem === '' ? text : newItem, id)}>Guardar</button>
                         </div>
                     </div>
                 </div>
