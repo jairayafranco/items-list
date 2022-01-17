@@ -15,7 +15,7 @@ const Modal = ({ id, text }) => {
                             <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div className="modal-body">
-                            <input type="text" className="form-control mb-2" defaultValue={text} onKeyUp={(e) => setNewItem(e.target.value)} />
+                            <input type="text" className="form-control mb-2" defaultValue={text} onChange={(e) => setNewItem(e.target.value)} />
                         </div>
                         <div className="modal-footer">
                             <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
