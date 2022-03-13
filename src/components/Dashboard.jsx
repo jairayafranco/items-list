@@ -2,12 +2,14 @@ import { useEffect, useState } from "react"
 import Modal from "./Modal"
 import API from "../services/API"
 import DOM from "../services/DOM"
+import { useAuth0 } from '@auth0/auth0-react'
 
 export default function Dashboard() {
     const [item, setItem] = useState("")
     const [getItems, setGetItems] = useState([])
     const [getItemId, setGetItemId] = useState([])
     const [loading, setLoading] = useState(true)
+    const { logout } = useAuth0()
 
     useEffect(() => {
       const loadSpinner = async() => {
@@ -27,6 +29,11 @@ export default function Dashboard() {
                         </div>
                         <div className="col-md-6 align-self-center">
                             <input className="form-control" id="filtro" placeholder="Buscar item..." type="text" onChange={(e) => DOM.searchItem(e)} />
+                        </div>
+                        <div>
+                            <button 
+                                className='btn btn-primary' 
+                                onClick={() => logout({ returnTo: window.location.origin })}>Salir</button>
                         </div>
                     </div>
                 </div>
