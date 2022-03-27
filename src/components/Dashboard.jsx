@@ -52,7 +52,10 @@ export default function Dashboard() {
                             ? (<div className="loading mt-3"></div>)
                             : getItems.map((item, key) => (
                                 <li key={key} className="list-group-item" data={item.id}>
-                                    {item.descripcion}
+                                    {(/http|.com/).test(item.descripcion)
+                                        ? (<a href={item.descripcion} target="_blank">{item.descripcion}</a>)
+                                        : (<span>{item.descripcion}</span>)
+                                    }
                                     <button className="btn btn-danger btn-sm float-end borrar" onClick={(e) => DOM.deleteItem(e)}>X</button>
                                     <button className="btn btn-success btn-sm float-end" data-bs-toggle="modal" data-bs-target="#exampleModal" onClick={(e) => setGetItemId({ id: e.target.parentElement.getAttribute('data'), text: e.target.parentElement.firstChild.textContent})}>✎</button>
                                 </li>
