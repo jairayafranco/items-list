@@ -53,7 +53,7 @@ export default function Dashboard() {
                             : getItems.map((item, key) => (
                                 <li key={key} className="list-group-item" data={item.id}>
                                     {(/http|.com/).test(item.descripcion)
-                                        ? (<a href={item.descripcion} target="_blank">{item.descripcion}</a>)
+                                        ? (<a href={item.descripcion} target="_blank" rel="noreferrer">{item.descripcion}</a>)
                                         : (<span>{item.descripcion}</span>)
                                     }
                                     <button className="btn btn-danger btn-sm float-end borrar" onClick={(e) => DOM.deleteItem(e)}>X</button>
