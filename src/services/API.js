@@ -1,4 +1,4 @@
-const url = 'https://apiharperexpress.jairayafranco.repl.co/items'
+const url = process.env.API_URL
 
 const getData = async() => {
     const response = await fetch(url)
